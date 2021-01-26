@@ -12,6 +12,7 @@ import maml.values.MAMLTable;
 import maml.values.MAMLValue;
 /**
  * Class used for convienient methods to add configuration to your server
+ * 
  * @author Krystilize
  *
  */

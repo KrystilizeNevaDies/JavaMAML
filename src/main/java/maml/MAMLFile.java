@@ -52,6 +52,11 @@ public class MAMLFile {
 		this.file = contents;
 	}
 	
+	/**
+	 * Parses this MAMLFile object into a MAMLTable 
+	 * 
+	 * @return table the parsed table
+	 */
 	public MAMLTable parse() {
 		// Create new table
 		MAMLTable table = new MAMLTable();
