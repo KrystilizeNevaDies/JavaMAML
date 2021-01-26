@@ -7,7 +7,7 @@ import maml.values.MAMLTable;
 
 public class MAMLTest {
 	public static void main(String[] arguments) {
-		File javaFile = new File("C:\\Users\\Krystilize\\Downloads\\test.maml");
+		File javaFile = new File("test.maml");
 		MAMLFile file = null;
 		try {
 			file = new MAMLFile(javaFile);
