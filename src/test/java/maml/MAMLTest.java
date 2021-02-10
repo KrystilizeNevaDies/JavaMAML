@@ -9,7 +9,6 @@ public class MAMLTest {
 	public static void main(String[] arguments) {
 		File javaFile = new File("test.maml");
 		// Parse file
-		@SuppressWarnings("unused")
 		MAMLTable table = null;
 		
 		try {
@@ -20,6 +19,6 @@ public class MAMLTest {
 		
 		// DO TESTS HERE:
 		
-		// table.whateveryouwanttotestthereareinfinitepossibilities
+		System.out.println(table.asString());
 	}
 }
