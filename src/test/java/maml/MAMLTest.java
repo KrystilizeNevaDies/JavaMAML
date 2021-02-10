@@ -8,20 +8,18 @@ import maml.values.MAMLTable;
 public class MAMLTest {
 	public static void main(String[] arguments) {
 		File javaFile = new File("test.maml");
-		MAMLFile file = null;
+		// Parse file
+		@SuppressWarnings("unused")
+		MAMLTable table = null;
+		
 		try {
-			file = new MAMLFile(javaFile);
+			table = MAMLFile.parse(javaFile);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// Parse file
-		MAMLTable table = file.parse();
 		
-		// Get Config
-		MAMLConfig config = MAMLConfig.tableToConfig(table);
+		// DO TESTS HERE:
 		
-		// Read from table
-		System.out.println(config.configToFileString());
+		// table.whateveryouwanttotestthereareinfinitepossibilities
 	}
 }

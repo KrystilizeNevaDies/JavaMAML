@@ -1,6 +1,6 @@
 package maml.values;
 
-public class MAMLBoolean implements MAMLValue{
+public class MAMLBoolean implements MAMLValue {
 	boolean value;
 	
 	public MAMLBoolean(boolean value) {
@@ -12,12 +12,22 @@ public class MAMLBoolean implements MAMLValue{
 	}
 	
 	@Override
-	public String asKey() {
+	public String asString() {
 		return String.valueOf(value);
 	}
 	
 	@Override
 	public String toString() {
-		return value + "";
+		return "MAMLBoolean(" + value + ")";
+	}
+
+	public static MAMLBoolean parseString(String stringToParse) {
+		MAMLTable.log("Parsing Boolean:" + stringToParse);
+		
+		return new MAMLBoolean(stringToParse.equals("true"));
+	}
+	
+	public boolean equals(MAMLBoolean bool) {
+		return bool.getValue() == this.getValue();
 	}
 }

@@ -17,19 +17,19 @@ import maml.values.MAMLValue;
  *
  */
 public class MAMLConfig {
-	private ArrayList<Entry<String, MAMLValue>> table;
+	private ArrayList<Entry<MAMLValue, MAMLValue>> table;
 
 	public MAMLConfig(MAMLTable table) {
 		// Convert all previous values to MAMLConfig storage
-		this.table = new ArrayList<Entry<String, MAMLValue>>();
-		table.getJavaTable().forEach((key, value) -> {
-			SimpleEntry<String, MAMLValue> newEntry = new AbstractMap.SimpleEntry<String, MAMLValue>(key, value);
+		this.table = new ArrayList<Entry<MAMLValue, MAMLValue>>();
+		table.getValue().forEach((key, value) -> {
+			SimpleEntry<MAMLValue, MAMLValue> newEntry = new AbstractMap.SimpleEntry<MAMLValue, MAMLValue>(key, value);
 			this.table.add(newEntry);
 		});
 	}
 	
 	public MAMLConfig() {
-		this.table = new ArrayList<Entry<String, MAMLValue>>();
+		this.table = new ArrayList<Entry<MAMLValue, MAMLValue>>();
 	}
 	
 	/**
@@ -51,17 +51,15 @@ public class MAMLConfig {
 	 * @return
 	 */
 	public String configToFileString() {
-		var s = new ArrayList<String>();
+		var stringList = new ArrayList<String>();
 		
 		table.forEach((entry) -> {
-			s.add(entry.getKey() + " = " + entry.getValue());
+			stringList.add(entry.getKey() + " = " + entry.getValue());
 		});
-		
-		String[] split = s.toArray(new String[s.size()]);
 		
 		String returnStr = "";
 		
-		for (String str : split) {
+		for (String str : stringList) {
 			returnStr += str + "\n";
 		}
 		
@@ -71,7 +69,7 @@ public class MAMLConfig {
 	/**
 	 * Sets a value mapped to a key
 	 */
-	public void setValue(String key, MAMLValue value) {
+	public void setValue(MAMLValue key, MAMLValue value) {
 		
 		// Check if value exists
 		if (this.containsKey(key)) {
@@ -79,23 +77,23 @@ public class MAMLConfig {
 		}
 		
 		// Else add value
-		var entry = new AbstractMap.SimpleEntry<String, MAMLValue>(key, value);
+		var entry = new AbstractMap.SimpleEntry<MAMLValue, MAMLValue>(key, value);
 		this.table.add(entry);
 	}
 
-	private void replaceValue(String key, MAMLValue value) {
+	private void replaceValue(MAMLValue key, MAMLValue value) {
 		for (int i = 0; i < table.size(); i++) {
 			var entry = table.get(i);
 			
-			var newEntry = new AbstractMap.SimpleEntry<String, MAMLValue>(key, value);
+			var newEntry = new AbstractMap.SimpleEntry<MAMLValue, MAMLValue>(key, value);
 			
 			if (entry.getKey().equals(key))
 				table.set(i, newEntry);
 		}
 	}
 	
-	public boolean containsKey(String key) {
-		ArrayList<String> keys = new ArrayList<String>();
+	public boolean containsKey(MAMLValue key) {
+		ArrayList<MAMLValue> keys = new ArrayList<MAMLValue>();
 		this.table.forEach((entry) -> {
 			if (entry.getKey().equals(key))
 				keys.add(key);
@@ -124,7 +122,7 @@ public class MAMLConfig {
 	public static MAMLConfig tableToConfig(MAMLTable table) {
 		MAMLConfig config = new MAMLConfig();
 		
-		table.getJavaTable().forEach((key, value) -> {
+		table.getValue().forEach((key, value) -> {
 			config.setValue(key, value);
 		});
 		

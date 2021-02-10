@@ -70,7 +70,7 @@ Permissions {
 }
 
 Player {
-	Gamemode = "survival"
+	Gamemode = "Survival"
 	PlayerIdleTimeout = 0
 	Difficulty = "easy"
 	EntityBroadcastRangePercentage = 100
@@ -78,5 +78,3 @@ Player {
 	AllowFlight = false
 	ViewDistance = 10
 }
-
-Summary = <Player.Difficulty> // Resolves to "easy"
