@@ -9,12 +9,14 @@ public class MAMLTable implements MAMLValue {
 	protected Map<MAMLValue, MAMLValue> table;
 	
 	public static boolean debug = false;
+
 	
 	public static final String dynamicStringCloseStr = ">";
 	public static final String dynamicStringOpenStr = "<";
 	public static final String tableCloseStr = "}";
 	public static final String tableOpenStr = "{";
 	public static final String delimStr = ";";
+	public static final String commaStr = ",";
 	public static final String setValueStr = "=";
 	public static final String commentMiddleStr = "*";
 	public static final String commentStartStr = "/";
@@ -23,6 +25,7 @@ public class MAMLTable implements MAMLValue {
 	public static final char tableClose = tableCloseStr.charAt(0);
 	public static final char tableOpen = tableOpenStr.charAt(0);
 	public static final char delim = delimStr.charAt(0);
+	public static final char comma = commaStr.charAt(0);
 	public static final char setValue = setValueStr.charAt(0);
 	public static final char commentMiddle = commentMiddleStr.charAt(0);
 	public static final char commentStart = commentStartStr.charAt(0);
@@ -38,7 +41,9 @@ public class MAMLTable implements MAMLValue {
 	}
 	
 	public String toFileString() {
-		return asString(0, new ArrayList<MAMLValue>(), false);
+		String output = asString(0, new ArrayList<MAMLValue>(), false);
+		
+		return output.replaceAll("}", "}\n");
 	}
 	
 	public String asString(int depth, ArrayList<MAMLValue> arrayList, boolean addBrackets) {
@@ -165,6 +170,28 @@ public class MAMLTable implements MAMLValue {
 	}
 
 	public static MAMLTable parseString(String stringToParse) {
+		MAMLTable.log("Parsing Table:" + stringToParse);
+		
+		MAMLTable table = new MAMLTable();
+		
+		StringBuffer buffer = new StringBuffer(stringToParse);
+		
+		// Remove opening brackets
+		buffer.delete(0, 1);
+		
+		// Add Delim to end
+		buffer.append(MAMLTable.delim);
+		
+		// Continuously iterate over the values in the table
+		readLoop(table, buffer);
+		
+		// Resolve pointers
+		resolvePointers(table, table);
+		
+		return table;
+	}
+	
+	public static MAMLTable parseFileString(String stringToParse) {
 		
 		// Remove single-line comments
 		stringToParse = stringToParse.replaceAll("([" + MAMLTable.commentStart + "][" + MAMLTable.commentStart + "].*)", "");
@@ -174,6 +201,9 @@ public class MAMLTable implements MAMLValue {
 		
 		// Remove multi-line commands
 		stringToParse = stringToParse.replaceAll("[" + MAMLTable.commentStart + "][" + MAMLTable.commentMiddle + "](.*?)[" + MAMLTable.commentMiddle + "][" + MAMLTable.commentStart + "]", "");
+		
+		// Replace commas with delims
+		stringToParse = stringToParse.replaceAll("[" + MAMLTable.comma + "]", MAMLTable.delimStr);
 		
 		// Remove double occurances of ; 
 		stringToParse = stringToParse.replaceAll(MAMLTable.delimStr + "+", MAMLTable.delimStr);
@@ -193,7 +223,6 @@ public class MAMLTable implements MAMLValue {
 		
 		// Add Delim to end
 		buffer.append(MAMLTable.delim);
-
 		
 		// Continuously iterate over the values in the table
 		readLoop(table, buffer);
@@ -254,6 +283,7 @@ public class MAMLTable implements MAMLValue {
 					MAMLValue tableValue = nextValue(buffer);
 					table.set(key, tableValue);
 					break;
+				case MAMLTable.tableCloseStr:
 				case MAMLTable.delimStr:
 					// No other value detected
 					MAMLTable.log("Value detected, generating it's corresponding key...");
@@ -350,7 +380,8 @@ public class MAMLTable implements MAMLValue {
 					new Throwable("Name not correctly found: " + buffer.charAt(0)).printStackTrace();
 				
 				// Check for number
-				if (name.replaceAll("[0-9]+([.]+[0-9]+)?", "").equals(""))
+				
+				if (name.replaceAll("[0-9]+([.]+[0-9]+)?", "").equals("") || name.replaceAll("[-][0-9]+([.]+[0-9]+)?", "").equals(""))
 					return MAMLNumber.parseString(name);
 				
 				if (name.startsWith("0x") || name.startsWith("0b"))
@@ -363,7 +394,7 @@ public class MAMLTable implements MAMLValue {
 				return MAMLString.parseString('"' + name + '"');
 		}
 	}
-	
+		
 	public boolean equals(MAMLTable table) {
 		return table.asString().equals(this.asString());
 	}

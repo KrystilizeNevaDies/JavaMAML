@@ -22,7 +22,7 @@ public class MAMLFile {
 		fileString = MAMLTable.tableOpen + fileString + MAMLTable.tableClose;
 		
 		// Parse as MAMLTable
-		return MAMLTable.parseString(fileString);
+		return MAMLTable.parseFileString(fileString);
 	}
 	
 
@@ -40,6 +40,6 @@ public class MAMLFile {
 		fileString = MAMLTable.tableOpen + fileString + MAMLTable.tableClose;
 		
 		// Parse as MAMLTable
-		return MAMLTable.parseString(fileString);
+		return MAMLTable.parseFileString(fileString);
 	}
 }

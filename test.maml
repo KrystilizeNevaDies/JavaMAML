@@ -1,80 +1,101 @@
-// Minecraft server properties
-// Fri Jul 31 21:07:23 EDT 2020
+// NEA Egg Hunt Config File
 
-/*
-This is the standard minecraft server configuration file implemented in MAML
-*/
-
-Debug = false
-
-Networking {
-	Connection {
-		ServerPort = 25565
-		ServerIP = "0.0.0.0"
-		MaxPlayers = 20
-		OnlineMode = true
-		MOTD = "A Minecraft Server"
-	}
+EggSpawning {
+	// Egg counts
+	AverageEggsPerPlayer = 10
 	
-	Rcon {
-		RconPort = 25575
-		RconPassword = ""
-		EnableRcon = false
-	}
-	
-	ResourcePack {
-		ResourcePack = ""
-		ResourcePacksha1 = ""
-	}
-	
-	QueryPort = 25565
-	EnableQuery = false
-	SnooperEnabled = true
-	NetworkCompressionThreshold = 256
-	WhiteList = false
-	EnforceWhitelist = false
-	PreventProxyConnections = false
-	UseNativeTransport = true
-	EnableJmxMonitoring = false
-	EnableStatus = true
 }
 
-World {
-	Generation {
-		GeneratorSettings = ""
-		LevelType = "default"
-		LevelName = "world"
-		LevelSeed = ""
-		GenerateStructures = true
-	}
-	Spawning {
-		SpawnProtection = 16
-		SpawnMonsters = true
-		SpawnNpcs = true
-		SpawnAnimals = true
-	}
-	MaxTickTime = 60000
-	AllowNether = true
-	Pvp = true
-	MaxWorldSize = 29999984
-	MaxBuildHeight = 256
-}
-
-Permissions {
-	ForceGamemode = false
-	EnableCommandBlock = false
-	BroadcastConsoleToOps = true
-	BroadcastRconToOps = true
-	OpPermissionLevel = 4
-	FunctionPermissionLevel = 2
-}
-
-Player {
-	Gamemode = "Survival"
-	PlayerIdleTimeout = 0
-	Difficulty = "easy"
-	EntityBroadcastRangePercentage = 100
-	Hardcore = false
-	AllowFlight = false
-	ViewDistance = 10
+EggSpawnPositions {
+	{93, 17, 1}
+	{-36, -44, -53}
+	{97, 67, 37}
+	{19, 12, -69}
+	{-84, -15, -85}
+	{12, -58, 40}
+	{-1, -25, -28}
+	{14, -26, -65}
+	{-33, 1, -60}
+	{-96, -86, -32}
+	{-8, 62, 1}
+	{-24, 20, -87}
+	{42, -51, 89}
+	{-46, 31, -30}
+	{9, 80, 15}
+	{88, -62, -91}
+	{34, -89, 96}
+	{-41, 72, 23}
+	{-2, 22, 16}
+	{-45, 57, -59}
+	{-83, -43, -33}
+	{-63, 64, 97}
+	{30, 80, 36}
+	{-85, 57, -44}
+	{28, -63, 54}
+	{1, 12, -57}
+	{-72, -65, -23}
+	{-70, -57, -68}
+	{-8, 79, 4}
+	{-49, -64, 23}
+	{-30, 41, 53}
+	{94, 41, -81}
+	{98, -13, -81}
+	{-53, -83, -37}
+	{-52, -97, 54}
+	{-49, -27, 12}
+	{-14, 32, -17}
+	{47, 16, 49}
+	{31, -5, 69}
+	{94, 15, -71}
+	{8, 38, -80}
+	{78, 5, 96}
+	{1, 8, -16}
+	{-15, 88, -29}
+	{-78, 44, 51}
+	{-45, -52, -44}
+	{-43, -30, -85}
+	{-66, -28, -39}
+	{16, 90, 71}
+	{-48, 12, 54}
+	{48, 63, -84}
+	{59, 13, 45}
+	{-61, 65, -99}
+	{49, 80, -94}
+	{81, 50, 63}
+	{81, 51, 71}
+	{46, 24, 5}
+	{45, 22, 3}
+	{23, 14, 50}
+	{87, 64, 71}
+	{80, -71, -75}
+	{-77, -58, -20}
+	{40, 62, -4}
+	{49, -64, 49}
+	{-78, -87, -56}
+	{-5, -74, 20}
+	{20, -38, -77}
+	{-32, -81, -87}
+	{65, 75, 8}
+	{-95, 10, 94}
+	{-65, -61, 60}
+	{-50, -74, -52}
+	{-88, -18, -76}
+	{76, -40, 13}
+	{-43, 1, -54}
+	{-97, -59, -81}
+	{-57, 33, -77}
+	{76, -71, 74}
+	{60, 83, -49}
+	{85, -26, -86}
+	{42, -22, 81}
+	{-90, -23, 74}
+	{22, 8, 85}
+	{51, -13, 7}
+	{-56, -29, 31}
+	{26, 71, 95}
+	{88, 59, 87}
+	{78, -1, -41}
+	{-62, 32, 14}
+	{83, 77, -18}
+	{-64, 72, -57}
 }

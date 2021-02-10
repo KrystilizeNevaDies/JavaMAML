@@ -19,6 +19,6 @@ public class MAMLTest {
 		
 		// DO TESTS HERE:
 		
-		System.out.println(table.asString());
+		System.out.println(table.toFileString());
 	}
 }

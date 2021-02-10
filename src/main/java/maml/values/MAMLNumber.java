@@ -13,7 +13,14 @@ public class MAMLNumber implements MAMLValue {
 	
 	@Override
 	public String asString() {
-		return String.format("%f", value);
+		String output = String.format("%f", value);
+		while (output.endsWith("0"))
+			output = output.substring(0, output.length() - 1);
+		
+		if (output.endsWith("."))
+			output = output.substring(0, output.length() - 1);
+			
+		return output;
 	}
 	
 	@Override
